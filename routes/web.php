@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostController;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Halaman Home
 Route::get('/', function () {
     return view('home', [
         'title' => 'Home'
     ]);
 });
+
+// Halaman About
 Route::get('/about', function () {
     return view('about', [
         'title' => "About",
@@ -30,8 +34,26 @@ Route::get('/about', function () {
 });
 
 
-
+// Halaman Blog
 Route::get('/blog', [PostController::class, 'index']);
 
 // halaman single post
 Route::get('blog/{post:slug}', [PostController::class, 'show']);
+
+//Halaman Category
+Route::get('/categories', function () {
+    return view('categories', [
+        'title' => 'Post Categories',
+        'categories' => Category::all()
+
+    ]);
+});
+
+//Halaman  Categories
+Route::get('/categories/{category:slug}', function (Category $category) {
+    return view('category', [
+        'title' => $category->name,
+        'posts' => $category->posts,
+        'category' => $category->name
+    ]);
+});
