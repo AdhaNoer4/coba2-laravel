@@ -17,4 +17,9 @@ class Post extends Model
         // hubungkan class Post ke category 
         return $this->belongsTo(Category::class); // belongsTo = one to one (relationship eloquent/databases)
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
