@@ -52,18 +52,18 @@ Route::get('/categories', function () {
 
 //Halaman  Categories
 Route::get('/categories/{category:slug}', function (Category $category) {
-    return view('category', [
-        'title' => $category->name,
-        'posts' => $category->posts,
-        'category' => $category->name
+    return view('posts', [
+        'title' => "Post By Category : $category->name",
+        'posts' => $category->posts->load('category', 'author') // mengatasi N+1 Problem dengan load()
+
     ]);
 });
 
 // Halaman Authors
 Route::get('/authors/{author:username}', function (User $author) {
     return view('posts', [
-        'title' => 'User Posts',
-        'posts' => $author->posts
+        'title' => "Post By Author : $author->name",
+        'posts' => $author->posts->load('category', 'author') // mengatasi N+1 Problem dengan load()
 
     ]);
 });
