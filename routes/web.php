@@ -20,7 +20,8 @@ use Illuminate\Support\Facades\Route;
 // Halaman Home
 Route::get('/', function () {
     return view('home', [
-        'title' => 'Home'
+        'title' => 'Home',
+        'active' => 'home'
     ]);
 });
 
@@ -28,6 +29,7 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('about', [
         'title' => "About",
+        'active' => 'about',
         "name" => "Adha NOOeRU",
         "email" => "adhanoer4@mail.com",
         "image" => "adha.jpg.webp"
@@ -36,15 +38,16 @@ Route::get('/about', function () {
 
 
 // Halaman Blog
-Route::get('/blog', [PostController::class, 'index']);
+Route::get('/posts', [PostController::class, 'index']);
 
 // halaman single post
-Route::get('blog/{post:slug}', [PostController::class, 'show']);
+Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 //Halaman Category
 Route::get('/categories', function () {
     return view('categories', [
         'title' => 'Post Categories',
+        'active' => 'categories',
         'categories' => Category::all()
 
     ]);
@@ -54,6 +57,7 @@ Route::get('/categories', function () {
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('posts', [
         'title' => "Post By Category : $category->name",
+        'active' => 'categories',
         'posts' => $category->posts->load('category', 'author') // mengatasi N+1 Problem dengan load()
 
     ]);

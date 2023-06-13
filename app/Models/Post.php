@@ -11,6 +11,7 @@ class Post extends Model
 
     // protected $fillable = ['title', 'excerpt', 'body']; //yg boleh di isi hanya yg ada di array
     protected $guarded = ['id']; //yg gk boleh di isi, sisanya boleh
+    protected $with = ['category', 'author']; //untuk eager loading dipindahkan dari controller ke sini.
 
     public function category()
     {
