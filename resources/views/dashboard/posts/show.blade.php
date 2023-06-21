@@ -16,7 +16,7 @@
                 {!! $post->body !!} 
             </article>
            
-            <a href="/posts" class="d-block mt-3">Kembali</a>
+           
         </div>
     </div>
 </div>
