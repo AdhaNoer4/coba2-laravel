@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
     use HasFactory;
-
+    //Sluggable;
     // protected $fillable = ['title', 'excerpt', 'body']; //yg boleh di isi hanya yg ada di array
     protected $guarded = ['id']; //yg gk boleh di isi, sisanya boleh
     protected $with = ['category', 'author']; //untuk eager loading dipindahkan dari controller ke sini.
@@ -53,4 +55,13 @@ class Post extends Model
     {
         return 'slug';
     }
+
+    // public function sluggable(): array
+    // {
+    //     return [
+    //         'slug' => [
+    //             'source' => 'title'
+    //         ]
+    //     ];
+    // }
 }
