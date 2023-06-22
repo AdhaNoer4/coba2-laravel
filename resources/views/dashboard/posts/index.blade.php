@@ -5,7 +5,7 @@
     <h1 class="h2">My Posts</h1>
   </div>
       @if (session()->Has('success'))
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success col-lg-8" role="alert">
         {{session('success')}}
         </div>
       @endif
@@ -30,8 +30,13 @@
             <td>{{ $post->category->name }}</td>
             <td>
                 <a href="/dashboard/posts/{{ $post->slug }}"><i class="fa-solid fa-eye" style="color: #2188e8;"></i></a>
-                <a href=""><i class="fa-regular fa-pen-to-square" style="color: #09f619;"></i></a>
-                <a href=""><i class="fa-solid fa-trash" style="color: #ff0a0a;"></i></a>
+                <a href="/dashboard/posts/{{ $post->slug }}/edit"><i class="fa-regular fa-pen-to-square" style="color: #09f619;"></i></a>
+                <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline">
+                @method('delete')
+                @csrf
+                <button class="border-0 bg-transparent"><i class="fa-solid fa-trash" style="color: #ff0a0a;" onclick="return confirm('Are you sure?')"></i></button>
+                </form>
+                
             </td>
         </tr>
         @endforeach
